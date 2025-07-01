@@ -1,0 +1,83 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "HOKALAZA_KeyUI"
+gui.ResetOnSpawn = false
+
+local popup = Instance.new("Frame", gui)
+popup.Size = UDim2.new(0, 360, 0, 240)
+popup.Position = UDim2.new(0.5, 0, 0.5, 0)
+popup.AnchorPoint = Vector2.new(0.5, 0.5)
+popup.BackgroundColor3 = Color3.fromRGB(18, 22, 28)
+popup.BackgroundTransparency = 0.05
+popup.BorderSizePixel = 0
+Instance.new("UICorner", popup).CornerRadius = UDim.new(0, 14)
+
+local title = Instance.new("TextLabel", popup)
+title.Text = "Enter Key to Access Script"
+title.Size = UDim2.new(1, -20, 0, 40)
+title.Position = UDim2.new(0, 10, 0, 12)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(0, 255, 200)
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 20
+
+local input = Instance.new("TextBox", popup)
+input.Size = UDim2.new(1, -40, 0, 40)
+input.Position = UDim2.new(0, 20, 0, 70)
+input.PlaceholderText = "Enter Key Here"
+input.Text = ""
+input.BackgroundColor3 = Color3.fromRGB(36, 41, 56)
+input.TextColor3 = Color3.fromRGB(240, 255, 255)
+input.Font = Enum.Font.Gotham
+input.TextSize = 18
+Instance.new("UICorner", input).CornerRadius = UDim.new(0, 8)
+
+local confirm = Instance.new("TextButton", popup)
+confirm.Size = UDim2.new(1, -40, 0, 38)
+confirm.Position = UDim2.new(0, 20, 0, 130)
+confirm.Text = "Unlock"
+confirm.BackgroundColor3 = Color3.fromRGB(0, 255, 200)
+confirm.TextColor3 = Color3.fromRGB(18, 22, 28)
+confirm.Font = Enum.Font.GothamBold
+confirm.TextSize = 20
+Instance.new("UICorner", confirm).CornerRadius = UDim.new(0, 8)
+
+local getKey = Instance.new("TextButton", popup)
+getKey.Size = UDim2.new(1, -40, 0, 34)
+getKey.Position = UDim2.new(0, 20, 0, 180)
+getKey.Text = "Get Key (Discord)"
+getKey.BackgroundColor3 = Color3.fromRGB(0, 175, 255)
+getKey.TextColor3 = Color3.fromRGB(0, 0, 0)
+getKey.Font = Enum.Font.GothamBold
+getKey.TextSize = 18
+Instance.new("UICorner", getKey).CornerRadius = UDim.new(0, 8)
+
+-- Clipboard support
+local function CopyDiscord()
+    if setclipboard then
+        setclipboard("https://discord.gg/MFRtEsKm")
+    elseif toclipboard then
+        toclipboard("https://discord.gg/MFRtEsKm")
+    elseif syn and syn.clipboard then
+        syn.clipboard.set("https://discord.gg/MFRtEsKm")
+    end
+    getKey.Text = "Link Copied!"
+    task.wait(1.5)
+    getKey.Text = "Get Key (Discord)"
+end
+getKey.MouseButton1Click:Connect(CopyDiscord)
+
+-- Unlock script if key is correct
+confirm.MouseButton1Click:Connect(function()
+    if input.Text == "crazy" then
+        gui:Destroy()
+        -- LOAD THE MAIN SCRIPT
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hehehe9028/Dead-rails-script/refs/heads/main/Dead%20rails%20HOKALAZA%20CRAZY"))()
+    else
+        confirm.Text = "Invalid Key!"
+        task.wait(1.5)
+        confirm.Text = "Unlock"
+    end
+end)
