@@ -71,7 +71,7 @@ getKey.MouseButton1Click:Connect(CopyDiscord)
 
 -- Unlock script if key is correct
 confirm.MouseButton1Click:Connect(function()
-    if input.Text == "crazy" then
+    if input.Text == "DEADCRAZY" then
         gui:Destroy()
         -- LOAD THE MAIN SCRIPT
         loadstring(game:HttpGet("https://raw.githubusercontent.com/hehehe9028/Dead-rails-script/refs/heads/main/Dead%20rails%20HOKALAZA%20CRAZY"))()
